@@ -1,0 +1,40 @@
+#BSUB -W 240:00
+#BSUB -o ./transcript.out
+#BSUB -e ./transcript.err
+#BSUB -cwd .
+#BSUB -q vlong 
+#BSUB -n 1 
+#BSUB -M 100
+#BSUB -R rusage[mem=100]
+##BSUB -B
+##BSUB -N
+##BSUB -u ssatpati@mdanderson.org
+#BSUB -J Xenium
+## explanation of arguments above:
+## -W run-time (wall clock) in hour:min  (required)
+## -o use this or output (stdout) will be sent via email!
+## -e use this or errors (stderr) will be sent via email!
+## -cwd set the current working directory.
+## -q queue name (required) 
+## -n number of processors required (28=entire node)
+## -M memory limit in GB (required). 
+## -R memory reserved in GB (default/minimum is 1GB).
+## -B send email to the user when the job begins (optional).
+## -N send email to the user when the job ends (optional).
+## -u send email to the specified address (required if -B and -N are used).
+##    It is recommended to always include your MD Anderson email address.
+## -J arbitrary job name, letters, dashes, underscores only - no spaces!
+##
+## Memory is specified as GB
+##
+## This script requests a wallclock of 1 hour, 12 CPUs, and 17G of memory, in the short queue
+
+## To submit:  bsub < example.lsf
+
+## All commands below should be valid linux commands
+
+#
+#source /rsrch3/home/genomic_med/ssatpati/anaconda3/bin/activate
+#conda activate spatial_xenium
+
+python convert_all.py
